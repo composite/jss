@@ -13,11 +13,13 @@ var jss = (function (undefined) {
         doc = document,
         head = doc.head || doc.getElementsByTagName('head')[0],
         sheets = doc.styleSheets,
-        adjSelAttrRgx = /((?:\.|#)[^\.\s#]+)((?:\.|#)[^\.\s#]+)/g;
+        adjSelAttrRgx = /((?:\.|#)[^\.\s#]+)((?:\.|#)[^\.\s#]+)/g,
+        pseudoBlkRgx = /::?(before|after)/g,
+        pseudoBlkRpl = ':' + (/WebKit/.test(navigator.userAgent) ? ':' : '') + '$1';
     
     jss = function (selector, sheet) {
         var obj = new Jss();
-        obj.init(selector, sheet);
+        obj.init(selector.toString().replace(pseudoBlkRgx, pseudoBlkRpl), sheet);
         return obj;
     };
     
