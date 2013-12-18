@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8"/>
         <style>
             #progress{border:1px solid black;padding:4px;overflow:hidden;}
-            #progress:before{background-color:green;display:block;height:20px;content:'';}
+            #progress:before{background-color:green;display:block;height:20px;content:' ';}
         </style>
         <script type="text/javascript" src="jss.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
@@ -13,10 +14,12 @@
                     function autoproc(per){
                         if(isNaN(per)) per=0;
                         jss('#progress::before',{
-                            width:per+'%'
+                            width:Math.round(per)+'%',
+                            fontSize:0, // IE 8 fix
+                            content:['" "','"a"','"b"','"c"'][Math.round(Math.random()*3)] //IE 8 fix
                         });
                         jss('#letter::first-letter',{
-                            'font-size':per+'px'
+                            'fontSize':per+'px'
                         });
                         jss('#letter::first-line',{
                             'color':'rgb('+[~~per*2,~~per*2,~~per*2].join(',')+')'
@@ -34,8 +37,8 @@
     </head>
     <body>
         <div id="progress"></div>
-        <p id="letter">불러오는 중...
-            <br/>Loading...
+        <p id="letter">Loading...
+            <br/>불러오는 중...
         </p>
     </body>
 </html>

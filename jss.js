@@ -14,7 +14,7 @@ var jss = (function (undefined) {
         head = doc.head || doc.getElementsByTagName('head')[0],
         sheets = doc.styleSheets,
         adjSelAttrRgx = /((?:\.|#)[^\.\s#]+)((?:\.|#)[^\.\s#]+)/g,
-        pseudoBlkRgx = /::?(before|after)/g,
+        pseudoBlkRgx = /::?(before|after|first-line|first-letter)/g,
         pseudoBlkRpl = ':' + (/WebKit/.test(navigator.userAgent) ? ':' : '') + '$1';
     
     jss = function (selector, sheet) {
